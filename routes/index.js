@@ -546,7 +546,7 @@ router.get('/project_card/:id',function(req,res,next){
     var price=req.body.price;
     var image=req.body.image;
 
-   
+  
     
     if(what=='Buy'){
 
@@ -599,6 +599,9 @@ router.get('/project_card/:id',function(req,res,next){
       }
 
     else{
+  
+
+      
         var cartDetails=cartMode({
           username:a,
           projectid:projectid,
@@ -610,10 +613,47 @@ router.get('/project_card/:id',function(req,res,next){
         cartDetails.save();
         var link='/project_card/'+projectid;
         res.redirect(link);
-    }
-
+    
+  }
   })
 
+
+router.get('/remove',function(req,res,next){
+  res.redirect('/home');
+})
+
+router.post('/remove',function(req,res,next){
+  var a=req.session.username;
+  var b=req.session.char;
+
+
+  var projectid=req.body.projectid;
+  var username=req.body.username;
+  var title=req.body.title;
+  var what=req.body.buy;
+  var price=req.body.price;
+  var image=req.body.image;
+
+  var cartDetails=cartMode.findOneAndDelete({projectid:projectid});
+ cartDetails.exec(function(err,data){
+  if(req.session.username){
+    var a=req.session.username;
+  var b=req.session.char;
+
+  var cartDetails=cartMode.find({username:a});
+  cartDetails.exec(function(err,data){
+    if(err) throw err;
+
+    res.render('cart',{records:data,loginas:b,loginuser:a});
+  })
+  }
+  else{
+    res.redirect('/login');
+  }
+ })
+
+
+})
 
   router.get('/video',function(req,res,next){
    if(req.session.username){

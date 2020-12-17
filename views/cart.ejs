@@ -21,6 +21,20 @@
                 <input type="number" class="" name="price" value="<%=row.price%>" style="display: none;">
                   <input type="submit" class="btn btn-warning" name="buy" value="Buy" style="width: 5rem;">
                   
+                  
+                  
+              </form>
+
+              <br>
+
+              <form action="/remove" method="post">
+                <input type="text" name="title" value="<%=row.title%>" style="display: none;">
+                <input type="text" name="username" value="<%=row.username%>" style="display: none;">
+                <input type="text" name="projectid" value="<%=row.projectid%>" style="display: none;">
+                <input type="number" class="" name="price" value="<%=row.price%>" style="display: none;">
+                
+                  <input type="submit" class="btn btn-warning" name="remove" value="Remove" style="width: 5rem;">
+                  
               </form>
         </div>
     </div>
