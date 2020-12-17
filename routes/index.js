@@ -888,6 +888,34 @@ router.post("/callback", (req, res) => {
 ///######################
 
 
+//################
+
+router.get('/forget',function(req,res,next){
+
+  var a=req.session.username;
+  var b=req.session.char;
+
+  res.render('forget',{loginas:b,loginuser:a})
+})
+
+router.post('/forget',function(req,res,next){
+
+  var username=req.body.username;
+ 
+
+  var asdDetails=asdMode.findOne({username:username});
+  asdDetails.exec(function(err,data){
+    if(err) throw err;
+    if(data==null) res.send('wrong email');
+
+    else
+    res.send('your password is '+data.password);
+  })
+
+})
+
+
+//############
 
 
 module.exports = router;
