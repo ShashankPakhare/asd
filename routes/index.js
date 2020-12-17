@@ -588,7 +588,7 @@ router.get('/project_card/:id',function(req,res,next){
               })
             
               sellerDetails.save();
-              res.redirect("/payment");
+              res.render("payment",{price:price});
             })
            
           }
@@ -747,7 +747,7 @@ if(!paymentDetails.amount || !paymentDetails.customerId || !paymentDetails.custo
     params['CHANNEL_ID'] = 'WEB';
     params['INDUSTRY_TYPE_ID'] = 'Retail';
     params['ORDER_ID'] = 'TEST_'  + new Date().getTime();
-    params['CUST_ID'] = paymentDetails.customerId;
+    params['CUST_ID'] = req.body.name;
     params['TXN_AMOUNT'] = paymentDetails.amount;
     params['CALLBACK_URL'] = 'http://localhost:3000/callback';
     params['EMAIL'] = paymentDetails.customerEmail;
