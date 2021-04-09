@@ -15,12 +15,16 @@ var path = require('path');
 const { websecurityscanner } = require('googleapis/build/src/apis/websecurityscanner');
 const { ESTALE } = require('constants');
 
+
+
 var employee=empMode.find({});
+var clas=empMode.find({});
 var project=projectMode.find({});
 var blogger=bloggerMode.find({});
 var seller=sellerMode.find({});
 var buyerer=buyerMode.find({});
 var cart=cartMode.find({});
+
 /* GET home page. */
 
 var asd=asdMode.find({});
@@ -915,8 +919,71 @@ router.post('/forget',function(req,res,next){
 })
 
 
-//############
 
+//==============================
+//############
+const { v4: uuidv4 } = require("uuid");
+
+router.get('/online',function(req,res,next){
+
+ 
+      var a=req.session.username;
+      var b=req.session.char;
+    
+      employee.exec(function(err,data){
+        if(err) throw err;
+        res.render('room',{success:'',records:data,loginas:b,loginuser:a});
+      })
+    
+  
+
+
+})
+
+
+router.post('/online',function(req,res,next){
+
+  var x= uuidv4();
+
+  if(req.session.username){
+    if(req.session.char=='Teacher'){
+      
+      var a=req.session.username;
+      var b=req.session.char;
+    
+
+ 
+  var classDetails=new empMode({
+    name:a,
+    meetlink:x,
+  })
+
+ 
+  classDetails.save(function(err,res1){
+    if(err) throw err;
+
+
+
+    employee.exec(function(err,data){
+      if(err) throw err;
+      res.render('room',{success:"Data Entered Successfully",records:data,loginuser:a,loginas:b})
+    })
+  })
+  
+}
+
+else{
+  res.redirect('/');
+}
+
+}
+else{
+  res.redirect('/login');
+}
+
+
+
+})
 
 module.exports = router;
 
@@ -955,3 +1022,5 @@ else{
    }
   });
 */
+
+/////https://onlineclas.herokuapp.com/

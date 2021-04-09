@@ -7,12 +7,10 @@ var conn=mongoose.connection;
 //var conn =mongoose.Collection;
 
 var employeeSchema=new mongoose.Schema({
-    name: String,
-    email: String,
-    etype:String,
-    hourlyrate: Number,
-    totalhour:Number,
-    Image:String,
+    name:String,
+    time:String,
+    subject:String,
+    meetlink:String,
 });
 
 var employeeModel=mongoose.model('Employee',employeeSchema);

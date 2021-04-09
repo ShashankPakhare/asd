@@ -1,0 +1,54 @@
+<!<%- include('header')%>
+
+
+<form action="/online" method="POST" >
+<h1 style="text-align: center;">To create Class Click on below button 
+   
+ 
+  
+  </h1>
+
+<h2 style="text-align: center;"> <input type="submit" name="btnSubmit" class="btn btn-danger" value="Create " /></h2>
+
+
+
+
+
+</form>
+
+<% if(records.length==0) {%>
+  <h1>NO class Is Schedule now </h1>
+
+  <%} else {%>
+
+
+    <% records.forEach(function(row) {%>
+ 
+ 
+     
+      <a href="https://onlineclas.herokuapp.com/<%=row.meetlink%>" style="text-decoration: none; color: black; margin: 1%; height: 24rem;">
+
+          <div class="card text-center" style="width: 16rem; margin: 1%; height: 24rem;">
+            <img class="card-img-top" src="./assets/images/class.jfif" style="height: 16rem;" alt="Card image cap">
+            <div class="card-body">
+              
+              <h5 class="card-title">Class Of  <%=row.name %> is going on</h5>
+              <p class="card-text"> join fast </p>
+              <a href="https://onlineclas.herokuapp.com/<%=row.meetlink%>" class="btn btn-danger"> click to join calss</a>
+             
+            </div>
+          </div>
+      
+        </a>
+              <!--Carousel Wrapper-->
+            
+              <!--/.Carousel Wrapper-->
+          <%})%>
+
+
+ <%}%>
+
+
+
+
+<!<%- include('footer')%>
